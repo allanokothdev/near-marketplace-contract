@@ -1,12 +1,36 @@
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
 use near_sdk::collections::UnorderedMap;
-use near_sdk::{near_bindgen, PanicOnDefault};
+use near_sdk::{near_bindgen, PanicOnDefault, AccountId};
 
 #[near_bindgen]
 #[derive(BorshDeserialize, BorshSerialize, PanicOnDefault)]
 
 pub struct Marketplace {
     products: UnorderedMap<String, String>,
+}
+
+#[near_bindgen]
+#[derive(BorshDeserialize, BorshSerialize, Serialize, PanicOnDefault)]
+pub struct Product {
+    id: String,
+    name: String,
+    description: String,
+    image: String,
+    location: String,
+    price: String,
+    owner: AccountId,
+    sold: u32
+}
+
+#[near_bindgen]
+#[derive(Serialize, Deserialize, PanicOnDefault)]
+pub struct Payload {
+    id: String,
+    name: String,
+    description: String,
+    image: String,
+    location: String,
+    price: String
 }
 
 #[near_bindgen]
