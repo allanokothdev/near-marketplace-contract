@@ -22,12 +22,16 @@ impl Marketplace {
     }
 
     pub fn set_product(&mut self, payload: Payload) {
-        let product = Product::
-        self.products.insert(&id, &product_name);
+        let product = Product::from_payload(payload);
+        self.listed_products.insert(&product.id, &product);
     }
 
-    pub fn get_product(&self, id: &String) -> Option<String> {
-        self.products.get(id)
+    pub fn get_product(&self, id: &String) -> Option<Product> {
+        self.listed_products.get(id)
+    }
+
+    pub fn get_products(&self) -> Vec<Product> {
+        self.listed_products.values_as_vector().to_vec()
     }
 }
 
